@@ -1,6 +1,6 @@
 # FeatureFlagSolution
 My solution to IBM feature flags.
-Spent roughly 5 hours on the project.
+Spent roughly 6 hours on the project.
 
 I've added a few screenshots in the IBM.zip file - It contains pictures of the azure setup, how the featureManager, AzureKeyVault and AppService look. The Program always uses the azure database (also for local runs).
 
