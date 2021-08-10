@@ -30,9 +30,11 @@ namespace FeatureFlagSolution
                         {
                             config.AddAzureAppConfiguration(options =>
                                 options.Connect(settings["ConnectionStrings:AppConfiguration"])
-                                        .UseFeatureFlags());
+                                        .UseFeatureFlags(featureFlagOptions =>
+                                        {
+                                            featureFlagOptions.CacheExpirationInterval = TimeSpan.FromMinutes(5);
+                                        }));
                         }
-
                     }).UseStartup<Startup>());
     }
 }
