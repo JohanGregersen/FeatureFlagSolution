@@ -12,6 +12,7 @@ namespace FeatureFlagSolution
 {
     public class Program
     {
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
@@ -23,6 +24,7 @@ namespace FeatureFlagSolution
                     webBuilder.ConfigureAppConfiguration(config =>
                     {
                         var settings = config.Build();
+
                         //featureToggled my featuretoggle to use either appsettings or AzureAppConfiguration
                         if (Boolean.Parse(settings["FeatureManagement:AzureFeatureTogglingEnable"])) 
                         {
