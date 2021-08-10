@@ -12,6 +12,8 @@ using FeatureFlagSolution.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.FeatureManagement;
+using Microsoft.FeatureManagement.FeatureFilters;
 
 namespace FeatureFlagSolution
 {
@@ -30,6 +32,13 @@ namespace FeatureFlagSolution
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddFeatureManagement()
+                .AddFeatureFilter<PercentageFilter>();
+
+            //Add Appconfigurations to use Azure
+            services.AddAzureAppConfiguration();
+
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

@@ -19,8 +19,13 @@ namespace FeatureFlagSolution
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    webBuilder.ConfigureAppConfiguration(config =>
+                    {
+                        var settings = config.Build();
+                        config.AddAzureAppConfiguration(options =>
+                            options.Connect(settings["ConnectionStrings:AppConfiguration"]).UseFeatureFlags(featureFlagOptions => {
+                                featureFlagOptions.CacheExpirationInterval = TimeSpan.FromSeconds(5);
+                            }));
+                    }).UseStartup<Startup>());
     }
 }
