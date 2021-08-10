@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.AzureAppConfiguration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -22,11 +23,12 @@ namespace FeatureFlagSolution
                     webBuilder.ConfigureAppConfiguration(config =>
                     {
                         var settings = config.Build();
-
                         //featureToggled my featuretoggle to use either appsettings or AzureAppConfiguration
-                        if (Boolean.Parse(settings["FeatureManagement:AzureFeatureTogglingEnable"])) {
+                        if (Boolean.Parse(settings["FeatureManagement:AzureFeatureTogglingEnable"])) 
+                        {
                             config.AddAzureAppConfiguration(options =>
-                                options.Connect(settings["ConnectionStrings:AppConfiguration"]).UseFeatureFlags());
+                                options.Connect(settings["ConnectionStrings:AppConfiguration"])
+                                        .UseFeatureFlags());
                         }
 
                     }).UseStartup<Startup>());
