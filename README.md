@@ -20,6 +20,7 @@ It is possible toggle locally in appsettings.json.
 
 ## Login Features
 Email confirmations and retrieval skeleton.
+
 Faked email confirmation.
 
 ## Azure Setup
