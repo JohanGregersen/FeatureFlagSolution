@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace WebPWrecover.Data
+namespace FeatureFlagSolution.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
