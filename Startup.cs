@@ -34,7 +34,8 @@ namespace FeatureFlagSolution
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddFeatureManagement()
-                .AddFeatureFilter<PercentageFilter>();
+                .AddFeatureFilter<PercentageFilter>()
+                .AddFeatureFilter<TimeWindowFilter>();
 
             //Add Appconfigurations to use Azure
             services.AddAzureAppConfiguration();

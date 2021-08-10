@@ -22,10 +22,13 @@ namespace FeatureFlagSolution
                     webBuilder.ConfigureAppConfiguration(config =>
                     {
                         var settings = config.Build();
-                        config.AddAzureAppConfiguration(options =>
-                            options.Connect(settings["ConnectionStrings:AppConfiguration"]).UseFeatureFlags(featureFlagOptions => {
-                                featureFlagOptions.CacheExpirationInterval = TimeSpan.FromSeconds(5);
-                            }));
+
+                        //featureToggled my featuretoggle to use either appsettings or AzureAppConfiguration
+                        if (Boolean.Parse(settings["FeatureManagement:AzureFeatureTogglingEnable"])) {
+                            config.AddAzureAppConfiguration(options =>
+                                options.Connect(settings["ConnectionStrings:AppConfiguration"]).UseFeatureFlags());
+                        }
+
                     }).UseStartup<Startup>());
     }
 }
